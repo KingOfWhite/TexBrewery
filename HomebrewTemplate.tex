@@ -1,0 +1,203 @@
+% arara: xelatex
+% arara: xelatex
+% arara: xelatex
+
+\documentclass[headings=openany, headings=optiontoheadandtoc]{scrbook}
+\input{DynamicPreamble.tex}
+
+\title{\TeX brewery}
+\author{KingOfWhite}
+\subtitle{A guide to homebrew with \TeX}
+
+\newcommand{\TeXBrewery}{\TeX brewery}
+
+\begin{document}
+
+\incgraph[documentpaper][width=\paperwidth, height=\paperheight]{\ImagePath /darkknight.jpg}
+
+\customtitle
+
+\setcounter{page}{0}
+
+\tableofcontents
+
+\addchap{Introduction}
+\changesecondarycolor{14823A}
+
+\lettrine{T}{his} is a document designed to explain as fully as possible how to create homebrew using \LaTeX (more precisely \texttt{XeLaTeX})  and the \texttt{tex} files I am providing.
+
+\hyperref[showcase]{Chapter \ref{showcase}} showcase \LaTeX  basic capability for making beautiful homebrew. The next chapters deal with installation and syntax of the document.
+
+\addsec{Is it hard to use ?}
+
+If you even have an hint of knowledge at programming or had to once format something using some code-like syntax, you should be fine for basic stuff. A look at the source code of the \texttt{tex} file of this document will allow you to emulate most of the examples included.
+
+Engine searches for simple syntax issues will yield satisfying answer and help you to solve simple problems.
+
+However if you really want to have control of your homebrew document, you will have to dive at least a little bit into the \TeX  world.
+
+\subsection{About the \TeXBrewery}
+
+In your pursuit of making good-looking homebrew documents, you might have heard of \href{http://www.naturalcrit.com/homebrew/}{the HomeBrewery} (if not I encourage you to take a look).
+
+HomeBrewery is a quite easy online tool to use while the TexBrew is an offline set of files that requires more investment but offers you more control over the document. It is also more suited for any long documents.
+
+
+
+\begin{strip}
+
+\vspace{1cm}
+
+\begin{myfancybox}
+\ImpromptuHeading{\Large}{Faithfulness to the original "PHB" style}
+\medskip
+
+{\centering
+\begin{tabularDnD}{$X^l}
+\rowstyle{\bfseries}
+Features & \TeXBrewery \\
+Standalone, online & No \\
+Initials  & Yes, custom \\
+Note box & Yes \\
+Super fancy box & Yes, one or two column. \\
+Language scripting capabilities & \LaTeX  \\
+Images  & Yes \\
+Part, index and table of contents support & \LaTeX  built-in \\
+Alternating colored  table & Yes \\
+PHB bottom image like & Yes, with color support \\
+\end{tabularDnD}
+}
+\end{myfancybox}
+\end{strip}
+
+\clearpage
+
+
+\chapter{DnD stuff}
+\label{showcase}
+\changesecondarycolor{771122}
+
+The only purpose of this chapter is to showcase the basic capabilities of \LaTeX  for your homebrew.
+The following content are short excerpts of the \texttt{Player's Basic Rules Version 0.3}, freely available at \href{dungeonsanddragons.com}{the WoTC website}, and is published in this \texttt{pdf} document as allowed by the OGL.
+
+\addsec{The D20}
+
+Does an adventurer’s sword swing hurt a dragon or just bounce off its iron-hard scales? Will the ogre believe an outrageous bluff? Can a character swim across a raging river? Can a character avoid the main blast of a fireball, or does he or she take full damage from the blaze? In cases where the outcome of an action is uncertain, the \textsc{Dungeons \&  Dragons} game relies on rolls of a 20-sided die, a d20, to determine success or failure.
+
+Every character and monster in the game has capabilities defined by six \textbf{ability scores}. The abilities are Strength, Dexterity, Constitution, Intelligence, Wisdom, and Charisma, and they typically range from 3 to 18 for most adventurers. (Monsters might have scores as low as 1 or as high as 30.) These ability scores, and the ability modifiers derived from them, are the basis for almost every d20roll that a player makes on a character’s or monster’s behalf.
+
+\begin{mybox}
+By the way did you realize the color of the rows and the small colored shape at the bottom of the page changed ? Just like in the books !
+
+To change this color, you can just use the macro \texttt{\textbackslash changesecondarycolor} with the following syntax :
+\begin{verbatim}
+\changesecondarycolor{771122} 
+\end{verbatim}
+771122 being the hexadecimal code of the chosen color for this page.
+
+\end{mybox}
+
+Ability checks, attack rolls, and saving throws are the three main kinds of d20 rolls, forming the core of the rules of the game. All three follow these simple steps.
+\begin{enumerate}
+\itemcompact{Roll the die and add a modifier.} Roll a d20 and add the relevant modifier. This is typically the modifier derived from one of the six ability scores, and it sometimes includes a proficiency bonus to reflect a character’s particular skill. (See chapter 1 for details on each ability and how to determine an ability’s modifier.)
+
+\itemcompact{Apply circumstantial bonuses and penalties.} A classfeature, a spell, a particular circumstance, or some other effect might give a bonus or penalty to the check.
+
+\itemcompact{Compare the total to a target number.} If the total equals or exceeds the target number, the ability check, attack roll, or saving throw is a success. Otherwise, it’s a failure. The DM is usually the one who determines target 
+numbers and tells players whether their ability checks, attack rolls, and saving throws succeed or fail.
+
+The target number for an ability check or a saving throw is called a Difficulty Class (DC). The target number for an attack roll is called an Armor Class (AC). 
+
+This simple rule governs the resolution of most tasks in D\,\& D play. Chapter 7 provides more detailed rules for using the d20 in the game.
+\end{enumerate}
+
+\addsec{Determine Ability Scores}
+
+[...]
+
+\ImpromptuHeading{\Large}{Ability Scores and Modifiers}
+
+\begin{tabular}{cc}
+\begin{tabularDnD}[.49\linewidth]{cc}
+\textbf{Score}&\textbf{Modifier}\\
+1&-5\\
+2-3&-4\\
+4-5&-3\\
+6-7&-2\\
+8-9&-1\\
+10-11&+0\\
+12-13&+1\\
+14-15&+2\\
+\end{tabularDnD} 
+&
+\begin{tabularDnD}[.49\linewidth]{cc}
+\textbf{Score}&\textbf{Modifier}\\
+16-17&+3\\
+18-19&+4\\
+20-21&+5\\
+22-23&+6\\
+24-25&+7\\
+26-27&+8\\
+28-29&+9\\
+30&+10\\
+\end{tabularDnD}
+\\
+\end{tabular}
+\bigskip
+
+\ImpromptuHeading{\Large}{Ability Score Summary}
+
+\begin{simplestbox}
+Strength
+\end{simplestbox}
+\vspace{-2mm}
+\begin{description}[nosep,font=\normalfont\itshape]
+\item[Measures:] Natural athleticism, bodily power
+\item[Important for:] Fighter
+\item[Racial Increases:] \hfill
+\begin{itemize}[nosep,label={}]
+\item Mountain dwarf (+2)
+\item Human (+1)
+\end{itemize}
+\end{description}
+
+
+
+
+\chapter{Installation}
+
+This chapter deals with installation on Windows, but equivalent steps may be taken on Linux or Mac OS as well.
+
+\addsec{Downloads}
+
+Before proceeding, you need to install the following.
+\begin{description}
+\item[A LaTeX distribution.] I recommend \texttt{\href{http://miktex.org/download}{MikTeX}} : just run and install. Whenever your document needs additional packages, \texttt{MikTeX} will ask your permission to download and will install them.
+
+\item[A good PDF viewer.] \texttt{\href{http://www.sumatrapdfreader.org/downloadafter.html}{SumatraPDF}} is recommended as it will reload a pdf that you would compile while Acrobat PDF Reader will prevent LaTeX from creating a new pdf.
+
+\item[A code editor.] I recommend \texttt{\href{http://www.xm1math.net/texmaker/index_fr.html}{TexMaker}} if you are new to \LaTeX . Otherwise your favorite editor may support \LaTeX . I personally use \texttt{Notepad++} and \texttt{arara}.
+
+\item[All Caps Font] I use \texttt{\href{http://www.fontsquirrel.com/fonts/list/foundry/gust-e-foundry}{Latin Modern Roman Caps}} as it is the closer free font to the PHB. Just download and install the All Caps versions, no additional step needed.
+
+\item[Dialogue Font] I use \texttt{\href{http://www.levien.com/type/myfonts/Inconsolata.otf}{Inconsolata}} for writing dialogues. Just download and install, no additional step needed.
+\end{description}
+
+\addsec{Set up the \TeXBrewery}
+
+
+
+
+\chapter{Basic \LaTeX stuff}
+
+
+
+
+
+\chapter{More advanced commands}
+
+\addsec{Images}
+
+
+
+\end{document}

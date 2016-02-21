@@ -1,0 +1,16 @@
+%directory setup
+\newcommand*{\CommonPath}{common}%
+\newcommand*{\ImagePath}{img}%
+\newcommand*{\DocPath}{unsungrealms}
+\input{\CommonPath /preamble.tex}
+\input{\CommonPath /boxes.tex}
+
+\ifcsdef{twoside}
+{}
+{\newtoggle{twoside}}
+
+\iftoggle{twoside}{%
+\input{\CommonPath /phbstyle.tex}
+}{%
+\input{\CommonPath /phbstyleoneside.tex}
+}
