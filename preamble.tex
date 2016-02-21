@@ -1,0 +1,139 @@
+\XeTeXdefaultencoding utf-8
+\usepackage{fontspec}
+\usepackage{lmodern}
+\usepackage{slantsc}
+\defaultfontfeatures{Mapping=tex-text}
+
+\graphicspath{{./\ImagePath /}}
+
+%Packages
+\usepackage{xparse}
+\usepackage{nicefrac}
+\usepackage{relsize}
+\usepackage{geometry}
+\usepackage{attrib}
+\usepackage[table,x11names]{xcolor}
+\usepackage[automark]{scrlayer-scrpage}
+\usepackage{calc}
+\usepackage{array, booktabs}
+\usepackage{siunitx}
+\usepackage{tabularx}
+\usepackage{caption}
+\usepackage{ragged2e}
+\usepackage{blindtext}
+\usepackage{enumitem}
+\usepackage{Carrickc} %look up cfr-initials if you want to change the font of the lettrine
+\usepackage{lettrine} %see style file for setup
+\usepackage{cuted}
+\usepackage{ifthen}
+\usepackage{graphicx}
+\usepackage{background}
+\usepackage{tcolorbox}
+\usepackage{tikzpagenodes}
+\usepackage{chngcntr}
+\usepackage{etoolbox}
+\usepackage{verse}
+\usepackage{incgraph}
+\usepackage{hyperref}
+
+%tcolorbox libraries
+\tcbuselibrary{skins}
+\tcbuselibrary{raster}
+\tcbuselibrary{breakable}
+%tikz stuff
+\usetikzlibrary{calc, matrix, positioning, fadings, decorations.pathmorphing}
+
+%fractal border stuff
+\newcounter{mathseed}
+\setcounter{mathseed}{3}
+\pgfmathsetseed{\arabic{mathseed}} 
+
+
+%etoolbox actions
+\AfterEndEnvironment{strip}{\leavevmode}
+
+
+%MACROS for all styles
+%Fonts
+\newfontfamily{\MyAllCapsFont}{Latin Modern Roman Caps}
+\newfontfamily{\MyDialogueFont}{Inconsolata}
+%Tables
+
+\newcolumntype{Y}{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}X}
+\newcolumntype{$}{>{\global\let\currentrowstyle\relax}}
+\newcolumntype{^}{>{\currentrowstyle}}
+\newcommand{\rowstyle}[1]{%
+\gdef\currentrowstyle{#1}
+  #1\ignorespaces
+}%
+
+% we cannot use \begin{tabularx} \end{tabularx}
+% would cause error see tabularx documentation
+
+\DeclareDocumentCommand\restartrowcolors {}{%
+  \ifhmode\unskip\fi
+  \vadjust{%
+    \global\rownum=0% used by \rowcolors
+  }%
+}%
+
+\DeclareDocumentEnvironment{tabularDnD}{O{.98\linewidth}m}
+{%
+\rowcolors{2}{}{phbsecondary!25}
+\tabularx{#1}{#2}
+}{%
+\endtabularx
+}
+
+%sections
+\DeclareDocumentCommand\subsecsub {O{0}mm} {%
+\subsection[#2]{#2}
+{%
+\usekomafont{subsubsection}\relsize{#1}#3
+}%
+}%
+
+%Custom title
+\DeclareDocumentCommand\customtitle {} {\maketitle}
+
+%Text
+
+\DeclareDocumentCommand\ImpromptuHeading {mm}{%
+{\RaggedLeft#1\MyAllCapsFont #2}
+}%
+
+%Dialog environment
+
+\NewTextFontCommand\refer\ReferStyle
+\DeclareDocumentCommand\ReferStyle {} {\scshape}
+\DeclareDocumentCommand\DirectStyle {} {%
+\relsize{-1}%
+\slshape
+}%
+\DeclareDocumentCommand\direct {m} {%
+    [{\DirectStyle #1}]
+}%
+
+\newlist{dialogue}{description}{1}
+\setlist[dialogue]{%
+topsep=1ex, partopsep=0pt, parsep=.5ex, itemsep=0pt,%
+itemindent=!,labelindent=2em,leftmargin=0pt,labelsep=1ex, rightmargin=.5ex,%
+format=\normalfont\uppercase,%
+before=\MyDialogueFont
+}%
+\DeclareDocumentCommand\speak {m} {%
+\item[#1:]
+}%
+
+
+
+
+%DnD
+\def\UnsungRealms {The Unsung Realms}
+\def\DnD {DnD}
+
+% +, -
+
+\def\Plus{\texttt{+}}
+\def\Minus{\texttt{-}}
+

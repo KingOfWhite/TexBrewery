@@ -1,0 +1,223 @@
+%Number definitions
+\newlength{\mytextwidth}
+\setlength{\mytextwidth}{170mm}
+\newlength{\mytextheight}
+\setlength{\mytextheight}{250mm}
+\newlength{\myinnermargin}
+\setlength{\myinnermargin}{20mm}
+\newlength{\mytopmargin}
+\setlength{\mytopmargin}{15mm}
+\newlength{\mybottommargin}
+\setlength{\mybottommargin}{23mm}
+\newlength{\mypagewidth}
+\setlength{\mypagewidth}{\mytextwidth+2\myinnermargin}
+\setlength{\columnsep}{8mm}
+
+%Colors
+
+
+\definecolor{phbgreen}{HTML}{E0E5C1}
+\definecolor{phborangeborder}{HTML}{DEB400}
+\definecolor{sectioncolor}{HTML}{58180D}
+\definecolor{sectionline}{HTML}{C9AD6A}
+\definecolor{monstertrianglecolor}{HTML}{5C2B1B}
+\definecolor{monsterboxcolor}{HTML}{FDF1DC}
+\definecolor{monsterboxbordercolor}{HTML}{D98C4E}
+\definecolor{phbsecondary}{HTML}{A669C6}
+\definecolor{phbbottom}{HTML}{DFC580}
+
+\newcommand{\changesecondarycolor}[1]
+{\definecolor{phbsecondary}{HTML}{#1}}
+
+
+%font style
+\KOMAoptions{fontsize=10pt}
+\setkomafont{part}{\color{sectioncolor}\Huge\MyAllCapsFont}
+\setkomafont{chapter}{\color{sectioncolor}\huge\MyAllCapsFont}
+\setkomafont{section}{\color{sectioncolor}\Large\MyAllCapsFont}
+\setkomafont{subsection}{\color{sectioncolor}\large\MyAllCapsFont}
+\setkomafont{subsubsection}{\color{sectioncolor}\large\MyAllCapsFont}
+
+
+%redefinitions of some LaTeX stuff
+%customtitle
+\makeatletter
+\renewcommand*{\customtitle}{%
+\begin{strip}
+\vspace*{0.3\textheight}
+\begin{center}
+{\color{sectioncolor}\Huge\MyAllCapsFont\@title}
+\vskip 3cm \par
+{\color{sectioncolor}\large \@subtitle}
+\end{center}
+\end{strip}
+}%
+\makeatother
+
+%enumerate
+\setlist[enumerate]{%
+nosep,itemindent=!,leftmargin=0pt,labelindent=0pt,listparindent=\parindent}%
+
+\setlist[description]{%
+nosep,itemindent=!,leftmargin=0pt,labelindent=1em, listparindent=\parindent,font=\bfseries}%
+
+
+\newcommand{\itemcompact}[1]{%
+\item {\bfseries #1} 
+}%
+
+%sections numbering
+\counterwithout{chapter}{part} % chapter won't include their (possible) part number
+\counterwithout{section}{chapter} % section won't include their chapter number
+
+%section format
+\RedeclareSectionCommand[beforeskip=0pt]{chapter}
+\RedeclareSectionCommand[beforeskip=5pt, afterskip=3pt]{section}
+\RedeclareSectionCommand[beforeskip=3pt, afterskip=3pt]{subsection}
+
+\renewcommand*{\chapterformat}{%
+\enskip\mbox{Chapter \thechapter : }}
+\renewcommand*{\sectionformat}{%
+\enskip\mbox{\thesection . }}
+
+\makeatletter
+\renewcommand{\sectionlinesformat}[4]{%
+\ifstr{#1}{section}{%
+    \parbox[t]{\linewidth}{%
+      \raggedsection\@hangfrom{\hskip #2#3}{#4}\par%
+      \vspace*{-1.2\ht\strutbox}\color{sectionline}{\rule{\linewidth}{1pt}}%
+    }%
+  }{%
+    \@hangfrom{\hskip #2#3}{#4}
+	}% 
+}
+\makeatother
+
+
+
+%KOMA PAGE STYLE
+\pagestyle{scrheadings}
+\renewcommand*{\chapterpagestyle}{scrheadings}
+%mark
+%\KOMAoptions{autooneside=true}
+
+\makeatletter
+\@ifclassloaded{scrbook}
+{%
+\automark{chapter}
+}
+{}
+\@ifclassloaded{scrartcl}
+{%
+\automark{section}
+}
+{}
+\makeatother
+
+\renewcommand*{\sectionmarkformat}{}
+\renewcommand*{\chaptermarkformat}{Chapter \thechapter  — }
+
+
+\newlength{\lenbtma}
+\setlength{\lenbtma}{10mm}
+\newlength{\lenbtmb}
+\setlength{\lenbtmb}{3mm}
+\newlength{\lenbtmc}
+\setlength{\lenbtmc}{12mm}
+\newlength{\lenbtmt}
+\setlength{\lenbtmt}{.3mm}
+
+
+\newcommand{\bottomgraphic}{%
+\begin{tikzpicture}
+\ifthispageodd{}{\begin{scope}[xscale=-1,yscale=1]}
+\coordinate (A) at (0,0);
+\coordinate (B) at (\lenbtma,-\lenbtmb);
+\coordinate (C) at (\mypagewidth-\lenbtmc-\lenbtmb,-\lenbtmb);
+
+
+\coordinate (L) at (0,-.5*\lenbtmb);
+\coordinate (M) at (.5*\lenbtma,-2*\lenbtmb);
+\coordinate (N) at (\lenbtma,-\lenbtmb-3*\lenbtmt);
+\coordinate (O) at (\mypagewidth-\lenbtma,-\lenbtmb-4*\lenbtmt);
+\coordinate (P) at (\mypagewidth-.5*\lenbtma,-2*\lenbtmb);
+\coordinate (Q) at (\mypagewidth,-\lenbtmb-3*\lenbtmt);
+
+
+\coordinate (V) at (\mypagewidth,-3*\lenbtmb);
+\coordinate (W) at (\mypagewidth-.5*\lenbtmc,-3*\lenbtmb);
+
+\coordinate (X) at (\mypagewidth-\lenbtmc,-\lenbtmb-3*\lenbtmt);
+\coordinate (Y) at (\mypagewidth-.5*\lenbtmc,-2*\lenbtmb-3*\lenbtmt);
+\coordinate (Z) at (\mypagewidth,-\lenbtmb-6*\lenbtmt);
+
+\node[above=0.1cm of P] (pg) {\pagemark};
+\ifthispageodd{%
+\node[above=0.1cm of C, anchor=south east] (hd) 
+{\color{sectioncolor}{\MakeUppercase{\leftmark}}};
+}
+{%
+\node[above=0.1cm of C, anchor=south west] (hd) 
+{\color{sectioncolor}{\MakeUppercase{\leftmark}}};
+}
+\draw (pg);
+\draw (hd);
+
+\draw[thick, phbbottom] (A) to [out=-30,in=180](B) -- (C)
+to [out=0,in=-30] (X) ;
+
+
+\draw[fill=phbsecondary] (V) -- (W) -- (X) to [out=-30,in=180] (Y) to [out=0,in=-145] (Z);
+\draw[thick, phbbottom] (W) -- (X) to [out=-30,in=180] (Y) to [out=0,in=-145] (Z);
+
+\draw[thin,phbbottom] (L) to [out=-30,in=120] (M) to [out=60,in=180] (N) -- (O)
+to [out=-30,in=180](P) to [out=0,in=-145](Q);
+\ifthispageodd{}{\end{scope}}
+\end{tikzpicture}
+}
+
+\clearscrheadfoot
+%header
+
+%footer
+
+
+
+%Background
+
+\newcommand{\bgimage}{%
+\begin{tikzpicture}
+\node at (0,0) {\includegraphics[width=\paperwidth]{backgrounddd.jpg}};
+\node at (0,0) {\bottomgraphic};
+\end{tikzpicture}
+}
+
+\backgroundsetup
+{%
+contents={\bgimage},placement=bottom,scale=1
+}
+
+
+%Lettrine setup
+\setcounter{DefaultLines}{4}
+\renewcommand{\LettrineFontHook}{\color{phbsecondary!50!black}\Carrickcfamily{}}
+\LettrineTextFont{\itshape}
+
+%document format
+\unsettoc{toc}{onecolumn} % two column toc
+\KOAoptions{chapterentrydots=true, sectionetnrydots=true}
+\KOMAoptions{twocolumn=true, twoside=true}
+
+
+\geometry{%
+a4paper,
+portrait,
+width=\mytextwidth,
+inner=\myinnermargin,
+outer=2\myinnermargin,
+%height=\mytextheight,
+top=\mytopmargin,
+bottom=\mybottommargin,
+twoside
+}
+

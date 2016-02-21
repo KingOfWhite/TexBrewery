@@ -1,0 +1,230 @@
+
+
+%BOXES
+
+\newlength{\lena}
+\setlength{\lena}{.5cm}
+\newlength{\lenb}
+\setlength{\lenb}{.13cm}
+\newlength{\lenc}
+\setlength{\lenc}{.48cm}
+
+\newcommand{\myfancyboxborder}
+{%
+\begin{tikzpicture}
+\begin{tcbclipinterior}
+%inner path
+\coordinate[right=\lenb of interior.west] (W);
+
+\coordinate[below right=\lenc and \lenb of interior.north west] (NWA);
+\coordinate[below right=\lenb and \lenc of interior.north west] (NWB);
+\coordinate[below right=\lenb and \lenc+\lena of interior.north west] (NWC);
+\coordinate[below right=0.5*\lena and 2.5*\lena of interior.north west] (NWD);
+
+\coordinate[below = 0.5*\lena of interior.north] (N);
+
+\coordinate[below left=0.5*\lena and 2.5*\lena of interior.north east](NED);
+\coordinate[below left=\lenb and \lenc+\lena of interior.north east] (NEC);
+\coordinate[below left=\lenb and \lenc of interior.north east] (NEB);
+\coordinate[below left=\lenc and \lenb of interior.north east] (NEA);
+
+\coordinate[left=\lenb of interior.east] (E);
+
+\coordinate[above left=\lenc and \lenb of interior.south east] (SEA);
+\coordinate[above left=\lenb and \lenc of interior.south east] (SEB);
+\coordinate[above left=\lenb and \lenc+\lena of interior.south east] (SEC);
+\coordinate[above left=0.5*\lena and 2.5*\lena of interior.south east] (SED);
+
+\coordinate[above=0.5*\lena of interior.south] (S);
+
+\coordinate[above right=0.5*\lena and 2.5*\lena of interior.south west](SWD);
+\coordinate[above right=\lenb and \lenc+\lena of interior.south west] (SWC);
+\coordinate[above right=\lenb and \lenc of interior.south west] (SWB);
+\coordinate[above right=\lenc and \lenb of interior.south west] (SWA);
+
+%outer details
+\coordinate[below right=1.5*\lena and \lenb of interior.north west] (NWx);
+\coordinate[below =1.25*\lena of interior.north west] (NWy);
+\coordinate[below = \lena of interior.north west] (NWa);
+\coordinate[right = \lena of interior.north west] (NWb);
+\coordinate[right = 2.25*\lena of interior.north west](NWc);
+
+
+\coordinate[below left=1.5*\lena and \lenb of interior.north east] (NEx);
+\coordinate[below =1.25*\lena of interior.north east] (NEy);
+\coordinate[below = \lena of interior.north east] (NEa);
+\coordinate[left = \lena of interior.north east] (NEb);
+\coordinate[left = 2.25*\lena of interior.north east](NEc);
+
+\coordinate[above left=1.5*\lena and \lenb of interior.south east] (SEx);
+\coordinate[above =1.25*\lena of interior.south east] (SEy);
+\coordinate[above = \lena of interior.south east] (SEa);
+\coordinate[left = \lena of interior.south east] (SEb);
+\coordinate[left = 2.25*\lena of interior.south east](SEc);
+
+\coordinate[above right=1.5*\lena and \lenb of interior.south west] (SWx);
+\coordinate[above =1.25*\lena of interior.south west] (SWy);
+\coordinate[above = \lena of interior.south west] (SWa);
+\coordinate[right = \lena of interior.south west] (SWb);
+\coordinate[right = 2.25*\lena of interior.south west](SWc);
+
+%DRAW IN ORANGE
+%innerzone
+\draw[phborangeborder, very thick] 
+(W)--
+(NWA) to [out=22.5,in=-112.5] (NWB) -- (NWC) to [out=-90,in=180] (NWD) 
+-- (N) --
+(NED) to [out=0,in=-90] (NEC) -- (NEB) to [out=-67.5,in=157.5] (NEA) 
+-- (E) --
+(SEA) to [out=-157.5,in=67.5] (SEB) -- (SEC) to [out=90,in=0] (SED)
+-- (S) --
+(SWD) to [out=180,in=90] (SWC) -- (SWB) to [out=112.5,in=-22.5] (SWA)
+-- cycle 
+;
+
+%outer details
+\draw[phborangeborder,very thick]
+(NWx) -- (NWy) -- (NWa) to [out=0,in=-90] (NWb)--(NEb) to [out=-90,in=180] (NEa) -- (NEy) -- (NEx);
+\fill[fill=phborangeborder] (NWc) circle (.35mm);
+\fill[fill=phborangeborder] (NEc) circle (.35mm);
+
+\draw[phborangeborder,very thick]
+(SWx) -- (SWy) -- (SWa) to [out=0,in=90] (SWb)--(SEb) to [out=90,in=180] (SEa) -- (SEy) -- (SEx);
+\fill[fill=phborangeborder] (SWc) circle (.35mm);
+\fill[fill=phborangeborder] (SEc) circle (.35mm);
+
+%innerdetails
+\draw[phborangeborder,very thick]
+(NWA) to [out=90,in=180] (NWB);
+\draw[phborangeborder,very thick]
+(NEB) to [out=0,in=90] (NEA);
+\draw[phborangeborder,very thick]
+(SEA) to [out=-90,in=0] (SEB);
+\draw[phborangeborder,very thick]
+(SWB) to [out=180,in=-90] (SWA);
+
+%REDRAW
+%innerzone
+\draw[black,thick, fill=white] 
+(W)--
+(NWA) to [out=22.5,in=-112.5] (NWB) -- (NWC) to [out=-90,in=180] (NWD) 
+-- (N) --
+(NED) to [out=0,in=-90] (NEC) -- (NEB) to [out=-67.5,in=157.5] (NEA) 
+-- (E) --
+(SEA) to [out=-157.5,in=67.5] (SEB) -- (SEC) to [out=90,in=0] (SED)
+-- (S) --
+(SWD) to [out=180,in=90] (SWC) -- (SWB) to [out=112.5,in=-22.5] (SWA)
+-- cycle 
+;
+
+%outer details
+\draw[black,thick]
+(NWx) -- (NWy) -- (NWa) to [out=0,in=-90] (NWb)--(NEb) to [out=-90,in=180] (NEa) -- (NEy) -- (NEx);
+\fill[fill=black] (NWc) circle (.3mm);
+\fill[fill=black] (NEc) circle (.3mm);
+
+\draw[black,thick]
+(SWx) -- (SWy) -- (SWa) to [out=0,in=90] (SWb)--(SEb) to [out=90,in=180] (SEa) -- (SEy) -- (SEx);
+\fill[fill=black] (SWc) circle (.3mm);
+\fill[fill=black] (SEc) circle (.3mm);
+
+%innerdetails
+\draw[black,thick]
+(NWA) to [out=90,in=180] (NWB);
+\draw[black,thick]
+(NEB) to [out=0,in=90] (NEA);
+\draw[black,thick]
+(SEA) to [out=-90,in=0] (SEB);
+\draw[black,thick]
+(SWB) to [out=180,in=-90] (SWA);
+
+\end{tcbclipinterior}
+\end{tikzpicture}
+}
+
+\newtcolorbox{myfancybox}{%
+blanker, boxsep=1cm, %
+underlay={\myfancyboxborder},%
+before skip=2ex,%
+after skip=2ex,
+}
+
+\newtcolorbox{myfancyboxbreakable}{%
+blanker, boxsep=1cm,
+underlay={\myfancyboxborder},
+before skip=2ex,%
+after skip=2ex,%
+breakable
+}
+
+
+\newtcolorbox{mymonsterbox}{%
+enhanced,frame hidden, sharp corners,
+colback=monsterboxcolor,
+left=0mm,right=0mm,boxsep=2mm,
+before skip=.5ex,%
+after skip=.5ex,
+drop fuzzy shadow south,
+overlay ={%
+\coordinate[below=2mm of interior.north west] (A);
+\coordinate (B) at (interior.north east);
+
+\coordinate[above=2mm of interior.south east] (D);
+\coordinate (C) at (interior.south west);
+
+\filldraw[fill=monsterboxbordercolor, draw=black] (A) rectangle (B);
+\filldraw[fill=monsterboxbordercolor, draw=black] (C) rectangle (D);
+
+}
+}
+
+\newcommand{\DnDStatMod}[1]{\ifthenelse{#1>9}{+}{}\the\numexpr(#1-10)/2\relax}
+
+\newcommand{\DnDStats}[6]{%
+{%
+\centering
+\footnotesize
+\begin{tabular}{cccccc}
+STR&DEX&CON&INT&WIS&CHA \tabularnewline
+#1(\DnDStatMod{#1})&#2(\DnDStatMod{#2})&#3(\DnDStatMod{#3})&#4(\DnDStatMod{#4})&#5(\DnDStatMod{#5})&#6(\DnDStatMod{#6})\\
+\end{tabular}
+}
+}
+
+\newcommand{\monstertriangle}{%
+\begin{tikzpicture}
+\coordinate (A) at (\lena,0);
+\coordinate (B) at (\lena,0.2);
+\coordinate (C) at (\textwidth,0.1);
+\fill[monstertrianglecolor] (A)--(B)--(C)--cycle;
+\end{tikzpicture}
+}
+
+\newcommand{\monstersection}[1]{%
+    \parbox[t]{\linewidth}{\color{sectioncolor}\MyAllCapsFont\large #1}\par% same color setting as subsubsection
+      \vspace*{-0.1\ht\strutbox}\color{sectioncolor}{\rule{\linewidth}{0.8pt}}%
+}
+
+
+\newtcolorbox{mybox}{%
+enhanced,sharp corners, 
+drop lifted shadow=black,
+colback = phbsecondary!40,
+before skip=1ex,%
+after skip=1ex,
+}
+
+\newtcolorbox{simplestbox}{%
+frame code={}, sharp corners, 
+colback=phbsecondary!25,
+width=\linewidth,
+left=0pt,
+right=0pt,
+top=0pt,
+bottom=0pt,
+boxsep=5pt,
+}
+
+\newtcolorbox{blankbox}{%
+blanker
+}

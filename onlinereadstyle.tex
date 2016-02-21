@@ -1,0 +1,93 @@
+%Number definitions
+\newlength{\mytextwidth}
+\setlength{\mytextwidth}{170mm}
+\newlength{\mytextheight}
+\setlength{\mytextheight}{250mm}
+\newlength{\myoutermargin}
+\setlength{\myoutermargin}{20mm}
+\newlength{\mytopmargin}
+\setlength{\mytopmargin}{15mm}
+\newlength{\mybottommargin}
+\setlength{\mybottommargin}{23mm}
+\newlength{\mypagewidth}
+\setlength{\mypagewidth}{\mytextwidth+2\myoutermargin}
+
+%Colors
+
+\definecolor{phbgreen}{HTML}{E0E5C1}
+\definecolor{phborangeborder}{HTML}{DEB400}
+\definecolor{sectioncolor}{HTML}{58180D}
+\definecolor{sectionline}{HTML}{C9AD6A}
+\definecolor{monstertrianglecolor}{HTML}{5C2B1B}
+\definecolor{monsterboxcolor}{HTML}{FDF1DC}
+\definecolor{monsterboxbordercolor}{HTML}{D98C4E}
+\definecolor{phbsecondary}{HTML}{A669C6}
+\definecolor{phbbottom}{HTML}{DFC580}
+
+\newcommand{\changesecondarycolor}[1]
+{\definecolor{phbsecondary}{HTML}{#1}}
+
+
+%sections numbering
+\renewcommand*{\chapterformat}{%
+\enskip\mbox{Chapter \thechapter : }}
+
+\makeatletter
+\renewcommand{\sectionlinesformat}[4]{%
+\ifstr{#1}{subsection}{%
+    \parbox[t]{\linewidth}{%
+      \raggedsection {#4}\par%
+      \vspace*{-0.9\ht\strutbox}\color{sectionline}{\rule{\linewidth}{2pt}}%
+    }%
+  }{%
+    {#4}%
+    \vspace*{-0.5\ht\strutbox}}% 
+}
+\makeatother
+
+%font style
+\setkomafont{part}{\color{sectioncolor}\Huge\ssc}
+\setkomafont{chapter}{\color{sectioncolor}\huge\ssc}
+\setkomafont{section}{\color{sectioncolor}\LARGE\ssc}
+\setkomafont{subsection}{\color{sectioncolor}\Large\ssc}
+\setkomafont{subsubsection}{\color{sectioncolor}\large\ssc}
+
+
+%KOMA PAGE STYLE
+\pagestyle{scrheadings}
+\renewcommand*{\chapterpagestyle}{scrheadings}
+%mark
+\KOMAoptions{autooneside=true}
+
+\makeatletter
+\@ifclassloaded{scrbook}
+{%
+\automark{chapter}
+}
+{}
+\@ifclassloaded{scrartcl}
+{%
+\automark{section}
+}
+{}
+\makeatother
+
+\renewcommand*{\sectionmarkformat}{}
+\renewcommand*{\chaptermarkformat}{Chapter \thechapter  — }
+
+\clearscrheadfoot
+%header
+
+%footer
+\cfoot{\pagemark}
+%document format
+\KOMAoptions{twocolumn=false, twoside=false}
+
+\geometry{%
+a4paper,
+portrait,
+}
+
+\backgroundsetup{contents={}}
+
+
